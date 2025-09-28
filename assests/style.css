@@ -1,10 +1,11 @@
 *{
     margin: 0;
     padding: 0;
+    overflow-y: hidden;
 }
 
 #jogo{
-   
+    z-index: 1;
     width: 100vw;
     height: 50vh;
 }
@@ -78,7 +79,7 @@
 }
 
 .aniO{
-    animation: obstaculoVindo 1.8s linear infinite ;
+    animation: obstaculoVindo 2s linear infinite ;
 }
 
 
@@ -115,3 +116,34 @@
     visibility: visible;
     transform: scale(1.0);
 }
+
+#foraDoJogo{
+ z-index: 0;
+ width: 100vw;
+ height: 50vh;
+ 
+}
+
+.trilhos{
+   
+}
+
+
+
+.trilhos img{
+width: 115vw;
+height: 123vh;
+position: absolute;
+top: -24%;
+
+}
+
+.trilhos img:nth-child(1){
+left: -1%;
+}
+
+.trilhos img:nth-child(2){
+left: 99%;
+}
+
+
