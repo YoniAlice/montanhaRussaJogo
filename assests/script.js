@@ -5,7 +5,10 @@ const perdido = document.querySelector(".perdeu");
 const restart = document.querySelector(".restart");
 const menu = document.querySelector("#menu");
 var jogoRodando = false
-
+let trilhoInterval = null
+const jogo = document.querySelector("#jogo")
+const larguraDoJogo = jogo.offsetWidth;
+const alturaDoJogo = jogo.offsetHeight
 //GAME START
 
 function StartGame(){
@@ -14,31 +17,43 @@ function StartGame(){
     //REMOVE TELAS FORA DO JOGO
 
     menu.style.display = "none";  // Tela Inicial
-    perdido.classList.remove('perdeuMesmo'); //Tela de derrota
+    perdido.style.display = "none" //Tela de derrota
 
     obstaculo.classList.add('aniO'); //ANIMAÇÃO DO OBJETO
-    setInterval( moverTrilho,0.2);
-    
-    
+
+    if(trilhoInterval){
+        clearInterval(trilhoInterval);
+    }
+
+    trilhoInterval = setInterval(moverTrilho, 2);   
 };
 
 function gameOver() { //PARA TUDO
 
         obstaculo.classList.remove('aniO'); //Para animação do Objeto
-        perdido.classList.add('perdeuMesmo'); //Adiciona a tela do gameOver
+        perdido.style.display = "flex" //Adiciona a tela do gameOver
         jogoRodando = false;
-}
+
+        if(trilhoInterval){
+            clearInterval(trilhoInterval);
+            trilhoInterval = null
+        }
+};
     
     const perdeuJogo = setInterval(function(){ //VERIFICA COLISÃO
-    let croseY = parseInt(window.getComputedStyle(player).getPropertyValue('top'));
-    let croseX = parseInt(window.getComputedStyle(obstaculo).getPropertyValue('left'));
+    let Y = parseInt(window.getComputedStyle(player).getPropertyValue('top'));
+    let X = parseInt(window.getComputedStyle(obstaculo).getPropertyValue('left'));
 
-    //COLISÃO DO OBJETO
+    let playerY = (Y / alturaDoJogo) * 100;
+    let obstaculoX = (X / larguraDoJogo) * 100;
     
-    if(croseX < 140 && croseX > 100 & croseY >=200){
+    
+        
+    //COLISÃO DO OBJETO    
+    if(obstaculoX < 10 && obstaculoX > 6 & playerY >=50){
         gameOver();
     }
-})
+});
 
 document.addEventListener('click', (e) => { //VERIFICA ONDE O CLICK CLICA
 
@@ -46,7 +61,7 @@ document.addEventListener('click', (e) => { //VERIFICA ONDE O CLICK CLICA
     if(el.contains(restart)) { //RESTART  
         StartGame();
     }
-})
+});
 
 
 
@@ -70,6 +85,7 @@ document.addEventListener("keydown", control); //VERIFICA SE TECLOU
 var trilhos = document.querySelector(".trilhos")
 var trilhoUm = document.querySelector(".trilho");
 var trilhoDois = trilhos.querySelector(':scope > :nth-child(2)');
+
 let velocidadeDoTrilhoUm = 0.1
 let velocidadeDoTrilhoDois = 99;
 const velocidadeDosTrilhos = 0.13
@@ -79,7 +95,6 @@ function moverTrilho(){ //MOVE O TRILHO PRA ESQUERDA
         
     
     //Velocidade dos Trilhos Um e Dois
-        
     velocidadeDoTrilhoUm += - velocidadeDosTrilhos; 
     trilhoUm.style.left = velocidadeDoTrilhoUm +"%"; 
 

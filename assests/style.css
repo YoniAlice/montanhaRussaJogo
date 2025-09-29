@@ -44,10 +44,10 @@
     
     height: 12vh;
     width: 12vh;
-    top: 76.3%;
+    top: 38%;
     left: 5%;
     z-index: 3;
-    position: relative;
+    position: absolute;
     background: url(img/player.png) no-repeat;
     background-size: cover;
     background-position: center;
@@ -62,22 +62,22 @@
 
 @keyframes pulo {
     0%{
-        top: 76.3%;;
+        top: 38%;;
     }
 
     7%{
-        top: 52%;
+        top: 30%;
     }
 
     20%{
-        top: 50%;
+        top: 25%;
     }
     70%{
-        top: 50%;
+        top: 25%;
     }
 
     100%{
-        top: 76.3%;
+        top: 38%;
     }
 
 }
@@ -87,8 +87,8 @@
     height: 12vh;
     width: 12vh;
     z-index: 2;
-    position: relative;
-    top: 53%;
+    position: absolute;
+    top: 38%;
     left: 80%;
     background: url(img/obstaculoUm.png) no-repeat;
     background-size: cover;
@@ -116,28 +116,18 @@
 }
 
 .perdeu{
-    position: absolute;
-    top: 10%;
-    left: 23%;
-    
+    position: relative;
     font-size: 3em;
-    display:flex;
+    display: none;
     align-items: center;
     flex-direction: column;
     justify-content: center;
-
-    opacity: 0;
-    visibility: hidden;
+    z-index: 1;
     transition: .2s ease;
-    transform: scale(1.5);
+ 
 }
 
-.perdeuMesmo{
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1.0);
-    z-index: 10;
-}
+
 
 #foraDoJogo{
  z-index: 0;
