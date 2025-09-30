@@ -2,27 +2,62 @@
     margin: 0;
     padding: 0;
     overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.corzinha{
+    background:linear-gradient(#716cf8,#7ebaf9,#6eba5a) ;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
 }
 
 #menu{
     position: absolute;
     z-index: 4;
     top: 15%;
-    left: 35%;
-    width: 30vw;
-    height: 60vh;
-    background-color: red;
+    left: 33%;
+    width: 35vw;
+    height: 75vh;
+    background:linear-gradient(#fffefbc6,#f2dcb9b8,#ffe0e0ec);
+    border: 0.2px solid rgba(54, 54, 54, 0.543);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+    border-radius: 10px;
 }
 
-#menu button {
-    width: 10vw;
-    height: 10vh;
+#menu p {
+    font-size: 5em;
+    margin-top: 2vw;
+    letter-spacing: 10px;
+}
+
+#menu div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#menu div button {
+    width: 20vw;
+    height: 12.5vh;
     margin: 15px;
-    border-radius: 7px;
+    border: 0.4px solid rgba(54, 54, 54, 0.543);
+    border-radius: 15px;
+    background:linear-gradient(#f4f3ee,#dfdbc8) ;
+
+    font-family: "Josefin Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.8em;
+    letter-spacing: 1.3px; 
+}
+
+#opacidadeBaixa{
+    opacity: 0.07;
 }
 
 #jogo{
@@ -31,8 +66,23 @@
     height: 50vh;
 }
 
-.chao{
+.score{
     background-color: blue;
+    width: 8vw;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 90%;
+    top: 3%;
+}
+
+.score p{
+    font-size: 2em;
+
+}
+
+.chao{
     width: 100vw;
     height: 1vh;
     position: absolute;
@@ -40,8 +90,7 @@
     z-index: 2;
 }
 
-.player{
-    
+.player{ 
     height: 12vh;
     width: 12vh;
     top: 38%;
@@ -51,8 +100,6 @@
     background: url(img/player.png) no-repeat;
     background-size: cover;
     background-position: center;
-    background-color: green;
-    
 }
 
 .animP{
@@ -89,14 +136,11 @@
     z-index: 2;
     position: absolute;
     top: 38%;
-    left: 80%;
+    left: 100%;
     background: url(img/obstaculoUm.png) no-repeat;
     background-size: cover;
     background-position: center;
-    background-color: red;
-    
-    
- 
+
 }
 
 .aniO{
@@ -106,7 +150,7 @@
 
 @keyframes obstaculoVindo {
     0%{
-        left: 80%;
+        left: 100%;
         
     }
     100%{

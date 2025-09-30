@@ -1,56 +1,155 @@
 //DADOS
 const player = document.querySelector(".player");
-const obstaculo = document.querySelector(".obstaculo");
+var obstaculo = document.querySelector(".obstaculo");
+let obstaculoInterval = null
 const perdido = document.querySelector(".perdeu");
 const restart = document.querySelector(".restart");
 const menu = document.querySelector("#menu");
 var jogoRodando = false
+let scoreInterval = null
 let trilhoInterval = null
 const jogo = document.querySelector("#jogo")
 const larguraDoJogo = jogo.offsetWidth;
 const alturaDoJogo = jogo.offsetHeight
-//GAME START
+const opacidade = document.querySelector("#opacidadeBaixa");
+let score = 0
 
+//GAME START
+ 
 function StartGame(){
     jogoRodando= true;
 
     //REMOVE TELAS FORA DO JOGO
-
+    score = 0;
     menu.style.display = "none";  // Tela Inicial
-    perdido.style.display = "none" //Tela de derrota
+    
 
-    obstaculo.classList.add('aniO'); //ANIMAÇÃO DO OBJETO
 
-    if(trilhoInterval){
+    if (obstaculoInterval){
+        clearInterval(obstaculoInterval);
+    }
+
+    obstaculoInterval = setInterval(movendoObjeto, 2)
+
+
+    if (scoreInterval){ //Interrompe o intervalo do Score
+        clearInterval(scoreInterval)
+    }
+
+    scoreInterval = setInterval(ganhaScore, 50)
+
+    if(trilhoInterval){ //Interrompe o intervalo do Trilho
         clearInterval(trilhoInterval);
     }
 
-    trilhoInterval = setInterval(moverTrilho, 2);   
+    trilhoInterval = setInterval(moverTrilho, 3);   
 };
 
 function gameOver() { //PARA TUDO
 
-        obstaculo.classList.remove('aniO'); //Para animação do Objeto
-        perdido.style.display = "flex" //Adiciona a tela do gameOver
-        jogoRodando = false;
+    obstaculo.classList.remove('aniO'); //Para animação do Objeto
+    perdido.style.display = "flex" //Adiciona a tela do gameOver
+    jogoRodando = false;
+    jogo.removeChild(obstaculo);
+    xObstaculo = 100;
+    player.style.left = "5%"
+    if (obstaculoInterval){
+        clearInterval(obstaculoInterval);
+        obstaculoInterval = null
+    }
 
-        if(trilhoInterval){
-            clearInterval(trilhoInterval);
-            trilhoInterval = null
-        }
+    if (scoreInterval){
+        clearInterval(scoreInterval)
+        scoreInterval = null
+    }
+
+    if(trilhoInterval){
+        clearInterval(trilhoInterval);
+        trilhoInterval = null
+    }
 };
     
+var velocidadeDoObstaculo = 0.13
+let xObstaculo = 100
+let xPlayer = 5;
+
+function ganhou(){
+
+}
+
+function movendoObjeto() {
+    jogo.appendChild(obstaculo);
+    
+    if (score <= 130){
+        xObstaculo += - velocidadeDoObstaculo
+        obstaculo.style.left = xObstaculo + "%"
+    }else if (score > 130 && score <= 296){
+        xObstaculo += - (velocidadeDoObstaculo * 2)
+        obstaculo.style.left = xObstaculo + "%"
+    }else if (score > 310 && score < 320){
+        xObstaculo += - (velocidadeDoObstaculo * 3)
+        obstaculo.style.left = xObstaculo + "%"
+    }else if (score > 330 && score <= 365){
+        xObstaculo += - (velocidadeDoObstaculo * 3)
+        obstaculo.style.left = xObstaculo + "%"
+    }else if (score > 365 && score < 450){
+        xObstaculo += - (velocidadeDoObstaculo )
+        obstaculo.style.left = xObstaculo + "%"
+    }else if (score > 600 && score < 620){
+        xObstaculo += + (velocidadeDoObstaculo)
+        obstaculo.style.left = xObstaculo + "%"
+    }else if (score > 650 && score < 800){
+        xObstaculo += - (velocidadeDoObstaculo * 3)
+        obstaculo.style.left = xObstaculo + "%"
+    }else if (score > 820 && score < 850){
+        xObstaculo += - (velocidadeDoObstaculo * 3)
+        obstaculo.style.left = xObstaculo + "%"
+    }else if (score > 880 && score <= 905){
+        xPlayer += + (velocidadeDoObstaculo * 2)
+        player.style.left = xPlayer + "%"
+    }else if (score > 905 && score <= 915){
+        xObstaculo += - (velocidadeDoObstaculo)
+        obstaculo.style.left = xObstaculo + "%"
+    }else if (score > 920 && score < 940){
+        xObstaculo +=  (velocidadeDoObstaculo * 2)
+        obstaculo.style.left = xObstaculo + "%"
+
+        xPlayer += - (velocidadeDoObstaculo * 2)
+        player.style.left = xPlayer + "%"
+    }else if (score >= 1000){
+        ganhou();
+    }
+
+
+    if(xObstaculo <= -5){
+        jogo.removeChild(obstaculo);
+        xObstaculo = 100
+    }
+}    
+
+function ganhaScore(){
+    score += 1;
+    atualizaScore();
+}
+
+function atualizaScore(){
+    document.querySelector("#pontos").innerText = score;
+}
+
     const perdeuJogo = setInterval(function(){ //VERIFICA COLISÃO
     let Y = parseInt(window.getComputedStyle(player).getPropertyValue('top'));
+    let xP = parseInt(window.getComputedStyle(player).getPropertyValue('left'));
     let X = parseInt(window.getComputedStyle(obstaculo).getPropertyValue('left'));
 
+    //TRANSFORMANDO EM %
+    let xpla = (xP / larguraDoJogo) * 100
     let playerY = (Y / alturaDoJogo) * 100;
     let obstaculoX = (X / larguraDoJogo) * 100;
     
-    
+    console.log(obstaculoX)
         
     //COLISÃO DO OBJETO    
-    if(obstaculoX < 10 && obstaculoX > 6 & playerY >=50){
+    if(obstaculoX <= xpla+4 && obstaculoX >= xpla & playerY >=50){
         gameOver();
     }
 });
@@ -58,7 +157,8 @@ function gameOver() { //PARA TUDO
 document.addEventListener('click', (e) => { //VERIFICA ONDE O CLICK CLICA
 
     let el = e.target;
-    if(el.contains(restart)) { //RESTART  
+    if(el.contains(restart)) { //RESTART 
+        perdido.style.display = "none" 
         StartGame();
     }
 });

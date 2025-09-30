@@ -4,14 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assests/style.css">
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <title>Carrinho</title>
 </head>
-<body>
+<body >
 
     <section id="menu">
+        
+        <p>JOGO</p>
+        <div>
         <button onclick="StartGame()">Começar</button>
         <button >Créditos</button>
+        </div>
     </section>
+
+    <div id="opacidadeBaixa"> </div>
 
     <section id="jogo">
 
@@ -19,12 +28,13 @@
             <h2>Você Perdeu!</h2>
             <img src="assests/img/restart.png" class="restart"  width="15%" alt="">
         </div>
+        <div class="score">
+            <p id="pontos">0</p>
+        </div>
         <div class="player"></div>
         <div class="obstaculo"></div>
         <div class="chao"></div>
 
- 
-   
     </section>
 
 
@@ -34,6 +44,8 @@
             <img class="trilho"  src="assests/img/trilhoo.png" alt="">
         </div>
     </section>
+
+   
 </body>
 <script src="assests/script.js"></script>
 </html>
