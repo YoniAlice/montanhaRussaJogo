@@ -4,33 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assests/style.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-    <title>Carrinho</title>
-</head>
-<body >
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
-    <section id="menu">
-        
-        <p>JOGO</p>
-        <div>
-        <button onclick="StartGame()">Começar</button>
-        <button >Créditos</button>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap" rel="stylesheet">
+
+    <title>FlicFlic Game</title>
+</head>
+<body>
+
+    <section class="ganhou">
+        <div style="display: flex; align-items:  center; flex-direction: column;">
+            <p>Sensacional!</p>
+            <p>Jogo Finalizado</p>
         </div>
+        <button>Sair</button>
     </section>
 
-    <div id="opacidadeBaixa"> </div>
+   <section id="menu">
+        <p>FlicFlic</p>
+        <p>Aperte a tecla "space" para pular </p>
+        <div>
+            <button onclick="StartGame()">Jogar</button>
+            <button onclick="criadores()" >Criadores</button>
+        </div>
+    </section>
+    
+    <section id="criadores">
+        <p style="font-size: 4em;">Criadores</p>
+        <div>
+            <p><b>Design:</b> Mariana Mota</p>
+            <p><b>Code:</b>­­ ­­ ­   Marcus Barbosa</p>
+        </div>
+        <button onclick="voltarMenu()">Volte</button>
+    </section>
 
+    <div class="corzinha"></div>
+    <div id="opacidadeBaixa"> 
+
+
+<div class="paisagem">
+    <img class="cenarioUm" src="assests/img/fundoroda.png" alt="">
+    
+</div>
     <section id="jogo">
 
+
+
         <div class="perdeu">
-            <h2>Você Perdeu!</h2>
-            <img src="assests/img/restart.png" class="restart"  width="15%" alt="">
+            <p>Perdeste!</p>
+            <p><b style="color: red;">DICA:</b> Tente pular bem antes do obstaculo te atingir, o personagem fica bastante tempo no ar</p>
+            <button class="restart" > 
+                Reiniciar
+            </button>
         </div>
+
+
+
         <div class="score">
             <p id="pontos">0</p>
         </div>
+
         <div class="player"></div>
         <div class="obstaculo"></div>
         <div class="chao"></div>
@@ -44,7 +82,7 @@
             <img class="trilho"  src="assests/img/trilhoo.png" alt="">
         </div>
     </section>
-
+</div>
    
 </body>
 <script src="assests/script.js"></script>

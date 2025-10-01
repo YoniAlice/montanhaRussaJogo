@@ -12,17 +12,23 @@ const jogo = document.querySelector("#jogo")
 const larguraDoJogo = jogo.offsetWidth;
 const alturaDoJogo = jogo.offsetHeight
 const opacidade = document.querySelector("#opacidadeBaixa");
-let score = 0
+const cor = document.querySelector(".corzinha")
+let score = 0;
+const ganhar = document.querySelector(".ganhou");
+const creditos = document.querySelector("#criadores");
 
 //GAME START
  
+
+
 function StartGame(){
     jogoRodando= true;
 
     //REMOVE TELAS FORA DO JOGO
     score = 0;
     menu.style.display = "none";  // Tela Inicial
-    
+    cor.style.display = "none";
+    opacidade.style.opacity = "1";
 
 
     if (obstaculoInterval){
@@ -36,15 +42,26 @@ function StartGame(){
         clearInterval(scoreInterval)
     }
 
-    scoreInterval = setInterval(ganhaScore, 50)
+    scoreInterval = setInterval(ganhaScore, 100)
 
     if(trilhoInterval){ //Interrompe o intervalo do Trilho
         clearInterval(trilhoInterval);
     }
 
     trilhoInterval = setInterval(moverTrilho, 3);   
+
+
 };
 
+function criadores(){
+    menu.style.display = "none";
+    creditos.style.display = "flex";
+}
+
+function voltarMenu(){
+    menu.style.display = "flex";
+    creditos.style.display = "none";
+}
 function gameOver() { //PARA TUDO
 
     obstaculo.classList.remove('aniO'); //Para animação do Objeto
@@ -74,7 +91,16 @@ let xObstaculo = 100
 let xPlayer = 5;
 
 function ganhou(){
+    clearInterval(trilhoInterval);
+    trilhoInterval = null;
+    clearInterval(scoreInterval);
+    scoreInterval = null;
+    clearInterval(obstaculoInterval);
+    obstaculoInterval = null
 
+    opacidade.style.opacity = "0.2";
+    cor.style.display = "flex";
+    ganhar.style.display = "flex";
 }
 
 function movendoObjeto() {
@@ -128,7 +154,7 @@ function movendoObjeto() {
 }    
 
 function ganhaScore(){
-    score += 1;
+    score += 2;
     atualizaScore();
 }
 
@@ -146,10 +172,11 @@ function atualizaScore(){
     let playerY = (Y / alturaDoJogo) * 100;
     let obstaculoX = (X / larguraDoJogo) * 100;
     
-    console.log(obstaculoX)
+    
+        
         
     //COLISÃO DO OBJETO    
-    if(obstaculoX <= xpla+4 && obstaculoX >= xpla & playerY >=50){
+    if(obstaculoX <= xpla+16 && obstaculoX >= xpla+10 & playerY >=50){
         gameOver();
     }
 });
@@ -191,8 +218,7 @@ let velocidadeDoTrilhoDois = 99;
 const velocidadeDosTrilhos = 0.13
 
 function moverTrilho(){ //MOVE O TRILHO PRA ESQUERDA
-    if(jogoRodando == true){
-        
+    if(jogoRodando == true){        
     
     //Velocidade dos Trilhos Um e Dois
     velocidadeDoTrilhoUm += - velocidadeDosTrilhos; 
